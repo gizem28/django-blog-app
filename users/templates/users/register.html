@@ -1,7 +1,8 @@
-{% extends 'users/base.html' %} {% block content %} {% load crispy_forms_tags %}
+{% extends 'users/base.html' %} 
+{% block content %} {% load crispy_forms_tags %}
 
 <h2>Join Today</h2>
-<hr>
+<hr />
 
 {% if request.user.is_authenticated %}
 
@@ -11,8 +12,8 @@
 
 <form action="" method="post" enctype="multipart/form-data">
   {% csrf_token %} {{ form_user | crispy }} {{ form_profile | crispy }}
-  <button type="submit" class="btn btn-primary">Sign Up</button>
+  <button type="submit" class="btn btn-info">Sign Up</button>
 </form>
-<hr>
+<hr />
 <p>Already have an account? <a href=" {% url 'user_login' %} ">Sign In</a></p>
 {% endif %} {% endblock content %}
