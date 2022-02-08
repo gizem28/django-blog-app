@@ -7,7 +7,7 @@
     <form class="mb-4" action="{% url 'user_login' %}" method="post">
       {% csrf_token %} {{form|crispy}}
       <button type="submit" class="btn btn-info mr-3">Login</button>
-      <span><a href="{% url 'change-password' %}">Forget Password?</a></span>
+      <span><a href="{% url 'password_reset' %}">Forget Password?</a></span>
       <hr>
     </form>
     <span>Need an account? <a href="{% url 'register' %}">Sign Up Now</a></span>
