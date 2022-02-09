@@ -29,7 +29,7 @@ def register(request):
 def user_logout(request):
     messages.success(request, "You Logout!")
     logout(request)
-    return redirect('list')
+    return render(request, "users/user_logout.html")
 
 def user_login(request):
 
