@@ -41,3 +41,6 @@ def user_login(request):
             login(request, user)
             return redirect('base')
     return render(request, 'users/user_login.html', {"form": form})
+
+def profile(request):
+    return render(request, 'users/profile.html')
