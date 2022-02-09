@@ -5,9 +5,13 @@ from .forms import UserForm
 # add authenticate and login
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
-def base(request):
-    return render(request, 'users/base.html')
+# def base(request):
+#     return render(request, 'users/base.html')
+
+class HomeView(TemplateView):
+    template_name="users/home.html"
 
 def register(request):
     form=UserForm
@@ -19,7 +23,7 @@ def register(request):
             password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
-            return redirect("base")
+            return redirect("list")
     context = {
         "form_user" : form
     }
@@ -28,7 +32,7 @@ def register(request):
 def user_logout(request):
     messages.success(request, "You Logout!")
     logout(request)
-    return redirect('base')
+    return redirect('list')
 
 def user_login(request):
 
@@ -39,7 +43,7 @@ def user_login(request):
         if user:
             messages.success(request, "Login successfull")
             login(request, user)
-            return redirect('base')
+            return redirect('list')
     return render(request, 'users/user_login.html', {"form": form})
 
 def profile(request):

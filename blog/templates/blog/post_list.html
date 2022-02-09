@@ -1,0 +1,24 @@
+{% extends 'users/base.html' %} {% load static %} 
+{% block content %}
+<center class="h2" style="color: grey">Popular Blogs</center>
+<hr />
+<br />
+    <div class="row row-cols-3 row-cols-md-3 g-4">
+      {% for blog in blogs %}
+      <div class="col">
+      <div class="card">
+        <img src="{{blog.image.url}}" style="height:250px" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{blog.title}}</h5>
+          <hr>
+          <p class="card-text" style="height:200px, overflow:hidden" >{{blog.content}}</p>
+          {% comment "" %}
+          <a href="#" class="btn btn-primary">Go somewhere</a>{% endcomment %}
+        </div>
+      </div>
+    </div>
+      {% endfor %}
+</div>
+
+
+{% endblock content %}

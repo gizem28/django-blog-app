@@ -9,5 +9,10 @@ class PostCreateView(SuccessMessageMixin, CreateView):
     model = Blog
     form_class = BlogForm
     template_name="blog/post_create.html"
-    success_url= reverse_lazy('base')
+    success_url= reverse_lazy('list')
     success_message =('Blog added successfully.')
+    
+class PostListView(ListView):
+    template_name='blog/post_list.html'
+    model=Blog
+    context_object_name='blogs'

@@ -3,6 +3,7 @@ from .views import register, user_logout, user_login, profile
 from django.contrib.auth import views
 
 urlpatterns = [
+    # path('', HomeView.as_view(), name="home"),
     path('register/', register, name='register' ),
     path('logout/', user_logout, name='logout' ),
     path('login/', user_login, name='user_login' ),
