@@ -2,7 +2,7 @@
 
 <center class="h2">Add New Blog</center>
 {% load crispy_forms_tags %}
-<div class="container">
+<div class="container" >
 <form action="" method="POST" enctype="multipart/form-data">
     {% csrf_token %} {{form|crispy}}
 

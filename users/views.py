@@ -7,9 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
-# def base(request):
-#     return render(request, 'users/base.html')
-
 class HomeView(TemplateView):
     template_name="users/home.html"
 
@@ -48,3 +45,20 @@ def user_login(request):
 
 def profile(request):
     return render(request, 'users/profile.html')
+
+def password_change(request):
+    if request.method == 'POST':
+        # We will use user change form this time
+        # Import it
+        form = UserForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('list')
+    else:
+        form = UserChangeForm()
+    
+    context = {
+        'form': form
+    }
+    
+    return render(request, "users/password_change.html", context)
