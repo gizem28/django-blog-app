@@ -16,3 +16,6 @@ class PostListView(ListView):
     template_name='blog/post_list.html'
     model=Blog
     context_object_name='blogs'
+    
+class PostDetailView(DetailView):
+    model = Blog

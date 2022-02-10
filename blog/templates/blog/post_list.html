@@ -12,8 +12,7 @@
           <h5 class="card-title text-info ">{{blog.title}}</h5>
           <hr>
           <p class="card-text" >{{blog.content | slice:200}}...</p>
-          {% comment "" %}
-          <a href="#" class="btn btn-primary">Go somewhere</a>{% endcomment %}
+          <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Read More</a>
         </div>
         <div class="card-footer">
           <small class="text-muted">Last updated 3 mins ago</small>

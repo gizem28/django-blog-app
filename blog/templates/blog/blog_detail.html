@@ -1,0 +1,19 @@
+{% extends 'users/base.html' %} 
+
+{% block content %}
+<center>
+<div class='card' style="width: 40rem;">
+    <img src="{{blog.image.url}}"  class="card-img-top h-10" alt="..." />
+    <div class="card-body">
+        <h5 class="card-title text-info ">{{blog.title}}</h5>
+        <hr>
+        <p class="card-text" >{{blog.content}}</p>
+        <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Update</a>
+        <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Delete</a>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted">Last updated 3 mins ago</small>
+      </div>
+    </div>
+  </center>
+{% endblock content %}
