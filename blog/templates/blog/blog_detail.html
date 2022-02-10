@@ -8,13 +8,14 @@
         <h5 class="card-title text-info ">{{blog.title}}</h5>
         <hr>
         <p class="card-text" >{{blog.content}}</p>
-        
-        {% if user == blog.author %}
-        <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Update</a>
-        <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Delete</a>
-        {% endif %}
+        {% if request.user == blog.author %}
+        <a href="{% url 'update' blog.id  %}" class="btn btn-warning">Update</a>
+        <a href="{% url 'delete' blog.id  %}" class="btn btn-warning">Delete</a>
+        {% endif %} 
       </div>
       <div class="card-footer">
+        <small class='text-muted'>Author: {{blog.author}}</small>
+        <br>
         <small class="text-muted">Last updated 3 mins ago</small>
       </div>
     </div>

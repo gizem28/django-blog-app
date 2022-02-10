@@ -12,7 +12,12 @@
           <h5 class="card-title text-info ">{{blog.title}}</h5>
           <hr>
           <p class="card-text" >{{blog.content | slice:200}}...</p>
+          {% if request.user.is_authenticated %}
           <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Read More</a>
+          {% else %}
+          <a href="{% url 'user_login'  %}" class="btn btn-warning">Read More</a>
+          {% endif %}
+          
         </div>
         <div class="card-footer">
           <small class='text-muted'>Author: {{blog.author}}</small>

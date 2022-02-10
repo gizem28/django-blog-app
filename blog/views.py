@@ -19,8 +19,18 @@ class PostListView(ListView):
     model=Blog
     context_object_name='blogs'
     
-# @login_required(login_url=LOGIN_REDIRECT_URL)
+
 class PostDetailView(DetailView):
-    if not user.is_authenticated:
-        reverse_lazy('login')
     model=Blog
+    
+class PostUpdateView(UpdateView):
+    model=Blog
+    form_class=BlogForm
+    template_name='blog\post_update.html'
+    success_url=reverse_lazy('list')
+    
+    
+class PostDeleteView(DeleteView):
+    model=Blog
+    template_name='blog\post_delete.html'
+    success_url=reverse_lazy('list')
