@@ -1,9 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Blog
 from .forms import BlogForm
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
+from main.settings import LOGIN_REDIRECT_URL
 
 class PostCreateView(SuccessMessageMixin, CreateView):
     model = Blog
@@ -17,5 +19,8 @@ class PostListView(ListView):
     model=Blog
     context_object_name='blogs'
     
+# @login_required(login_url=LOGIN_REDIRECT_URL)
 class PostDetailView(DetailView):
-    model = Blog
+    if not user.is_authenticated:
+        reverse_lazy('login')
+    model=Blog
