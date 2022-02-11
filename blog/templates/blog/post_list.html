@@ -4,9 +4,9 @@
 {% comment %} <center class="h2 text-secondary">Popular Blogs</center> {% endcomment %}
 <hr />
 <br />
-    <div class="row row-cols-2 row-cols-md-2">
+    <div class="row">
       {% for blog in blogs %}
-      <div class="col-4" >
+      <div class="col-4 mb-5" >
       <div class="card border-warning h-60">
         <img src="{{blog.image.url}}" style="height:250px" class="card-img-top" alt="..." />
         <div class="card-body">
@@ -19,13 +19,16 @@
           <a href="{% url 'user_login'  %}" class="btn btn-warning">Read More</a>
           {% endif %}
         </div>
-        <form action='{%url 'like_post' blog.pk%}' method='POST'>
+        <div class='ml-auto'>
+        <form action='{%url 'like_post' blog.pk%}' method='POST' >
           {% csrf_token %}
-         <button style='background:white' class='btn mr-2' type='submit', name='blog_id', value='{{blog.id}}'>
-           <i class="fa-solid fa-heart" style='color:red'>
+         <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
+           <i class="fa-solid fa-heart text-info">
         </i> {{blog.total_likes}} </button>
-        <i class="fa fa-eye" style='color:grey'></i> {% get_hit_count for blog %}
+        <i class="fa fa-eye text-info"></i> {% get_hit_count for blog %}
+        <i class="fa-solid fa-comment-dots text-info px-3" style='color:grey'></i>
         </form>
+      </div>
         <div class="card-footer">
           
           <small class='text-muted'>Author: {{blog.author}}</small>

@@ -13,13 +13,16 @@
         <a href="{% url 'delete' blog.id  %}" class="btn btn-warning">Delete</a>
         {% endif %} 
       </div>
+      
+      <form action='{%url 'like_post' blog.pk%}' method='POST' >
+        {% csrf_token %}
+       <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
+         <i class="fa-solid fa-heart text-info">
+      </i> {{blog.total_likes}} </button>
+      <i class="fa fa-eye text-info"></i> {% get_hit_count for blog %}
+      <i class="fa-solid fa-comment-dots text-info px-3" style='color:grey'></i>
+      </form>
       <div class="card-footer">
-        <form action='{%url 'like_post' blog.pk%}' method='POST'>
-          {% csrf_token %}
-         <button class='btn' type='submit', name='blog_id', value='{{blog.id}}'><i class="fa-solid fa-heart" style='color:red'>
-        </i>  {{total_likes}}</button>
-        <i class="fa fa-eye" style='color:grey'></i> {% get_hit_count for blog %}
-        </form>
         <small class='text-muted'>Author: {{blog.author}}</small>
         <br>
         <small class="text-muted">Last updated 3 mins ago</small>
