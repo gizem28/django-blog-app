@@ -30,10 +30,10 @@
         </form>
       </div>
         <div class="card-footer">
-          
+          <img class='rounded-circle' src='{{blog.author.profile.image.url}}'>
           <small class='text-muted'>Author: {{blog.author}}</small>
           <br>
-          <small class="text-muted">Last updated {{ blog.date_created |timesince }} ago</small>
+          <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small>
         </div>
       </div>
     </div>

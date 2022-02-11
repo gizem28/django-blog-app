@@ -5,7 +5,7 @@ from users.models import User
 class Blog(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
-    image = models.ImageField(upload_to="student/", default="avatar.png")
+    image = models.ImageField(upload_to="blogs/", default="avatar.png")
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     Category =(
