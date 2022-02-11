@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'users',
     #3rd part apps
     'crispy_forms',
+    'django.contrib.humanize',
+    'fontawesomefree',
+    'hitcount',
 ]
 
 MIDDLEWARE = [
@@ -141,3 +144,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 AUTH_USER_MODEL = 'users.User'
 
 LOGIN_REDIRECT_URL = 'users/user_login.html'
+

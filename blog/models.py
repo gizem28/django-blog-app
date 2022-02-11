@@ -22,6 +22,12 @@ class Blog(models.Model):
     
     category = models.CharField(max_length=50, choices=Category)
     status = models.CharField(max_length=50, choices=Status)
+    date_created=models.DateTimeField(auto_now_add=True, null=True)
+    likes=models.ManyToManyField(User, related_name='blog_posts')
+    post_views=models.IntegerField(default=0, null=True, blank=True)
 
+    def total_likes(self):
+        return self.likes.count()
+    
     def __str__(self):
         return f"{self.author}{self.title}"
