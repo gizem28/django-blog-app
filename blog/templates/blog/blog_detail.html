@@ -26,7 +26,23 @@
         <small class='text-muted'>Author: {{blog.author}}</small>
         <br>
         <small class="text-muted">Last updated 3 mins ago</small>
+        <hr>
+        <h3>Comments...</h3>
         <br>
+        {% if not blog.comments.all %}
+          Not comments yet...<a href='{%url 'add_comment' blog.pk %}'>Add one</a>
+        {% else %}
+          {% for comment in blog.comments.all %}'
+          <strong>
+            {{comment.name}}-
+            {{comment.date_added}}
+          </strong> <br>
+          {{comment.body}}
+          <br>
+          {% endfor %}
+          <a href='{%url 'add_comment' blog.pk %}'>Add comment</a>
+        {% endif %}
+          
       </div>
     </div>
   </center>

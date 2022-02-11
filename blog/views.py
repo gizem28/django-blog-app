@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog
-from .forms import BlogForm
+from .models import Blog, Comment
+from .forms import BlogForm, CommentForm
 from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
 from django.contrib.messages.views import SuccessMessageMixin
@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from main.settings import LOGIN_REDIRECT_URL
 from django.http import HttpResponseRedirect
 from hitcount.views import HitCountDetailView
+
 
 class PostCreateView(SuccessMessageMixin, CreateView):
     model = Blog
@@ -52,4 +53,14 @@ def LikeView(request, pk):
     post=get_object_or_404(Blog, id=request.POST.get('blog_id'))
     post.likes.add(request.user)
     return HttpResponseRedirect(reverse('detail', args=[str(pk)]))
+
+class AddCommentView(CreateView):
+    model=Comment
+    form_class=CommentForm
+    template_name='blog/add_comment.html'
+    
+    def form_valid(self, form):
+        form.instance.post_id=self.kwargs['pk']
+        return super().form_valid(form)
+    success_url=reverse_lazy('list')
     
