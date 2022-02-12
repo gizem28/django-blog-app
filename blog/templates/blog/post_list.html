@@ -1,39 +1,39 @@
 {% extends 'users/base.html' %} {% load static %} 
 {% load hitcount_tags %}
 {% block content %}
-<center class="h2 text-secondary">Popular Blogs</center>
-<hr />
+<p class="h4">Recent Posts</p>
+<hr class='hr1'/>
 <br />
     <div class="row">
       {% for blog in blogs %}
       <div class="col-4 mb-5" >
-      <div class="card border-warning h-60">
+      <div class="card h-55">
         <img src="{{blog.image.url}}" style="height:250px" class="card-img-top" alt="..." />
         <div class="card-body">
-          <h5 class="card-title text-info ">{{blog.title}}</h5>
+          <h5 class="card-title ">{{blog.title}}</h5>
           <hr>
           <p class="card-text" >{{blog.content | slice:200}}...</p>
           {% if request.user.is_authenticated %}
-          <a href="{% url 'detail' blog.id  %}" class="btn btn-warning">Read More</a>
+          <a href="{% url 'detail' blog.id  %}" class="btn btn-outline-dark">Read More</a>
           {% else %}
-          <a href="{% url 'user_login'  %}" class="btn btn-warning">Read More</a>
+          <a href="{% url 'user_login'  %}" class="btn btn-outline-dark">Read More</a>
           {% endif %}
         </div>
         <div class='ml-auto'>
         <form action='{%url 'like_post' blog.pk%}' method='POST' >
           {% csrf_token %}
          <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
-           <i class="fa-solid fa-heart text-info">
+           <i class="fa-solid fa-heart ">
         </i> {{blog.total_likes}} </button>
-        <i class="fa fa-eye text-info"></i> {% get_hit_count for blog %}
-        <i class="fa-solid fa-comment-dots text-info px-3" style='color:grey'></i>
+        <i class="fa fa-eye"></i> {% get_hit_count for blog %}
+        <i class="fa-solid fa-comment-dots px-3"></i>
         </form>
       </div>
         <div class="card-footer">
-          <img class='rounded-circle' src='{{blog.author.profile.image.url}}'>
-          <small class='text-muted'>Author: {{blog.author}}</small>
+          <img class='rounded-circle-list' src='{{blog.author.profile.image.url}}'/>
+          <small class='text-muted ml-2'>Author: {{blog.author}}</small>
           <br>
-          <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small>
+          {% comment %} <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small> {% endcomment %}
         </div>
       </div>
     </div>

@@ -1,46 +1,57 @@
 {% extends 'users/base.html' %} 
 {% load hitcount_tags %}
 {% block content %}
-<center>
-<div class='card' style="width: 40rem;">
-    <img src="{{blog.image.url}}"  class="card-img-top h-10" alt="..." />
-    <div class="card-body">
-        <h5 class="card-title text-info ">{{blog.title}}</h5>
-        <hr>
-        <p class="card-text" >{{blog.content}}</p>
-        {% if request.user == blog.author %}
-        <a href="{% url 'update' blog.id  %}" class="btn btn-warning">Update</a>
-        <a href="{% url 'delete' blog.id  %}" class="btn btn-warning">Delete</a>
-        {% endif %} 
-      </div>
-      
-      <form action='{%url 'like_post' blog.pk%}' method='POST' >
-        {% csrf_token %}
-       <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
-         <i class="fa-solid fa-heart text-info">
-      </i> {{blog.total_likes}} </button>
-      <i class="fa fa-eye text-info"></i> {% get_hit_count for blog %}
-      <i class="fa-solid fa-comment-dots text-info px-3" style='color:grey'></i>
-      </form>
-      <div class="card-footer">
+<div class="d-flex bd-highlight">
+  <div class="p-2 flex-grow-1 bd-highlight"><img class='detail' src="{{blog.image.url}}" alt="..." /></div>
+  <div class="p-2 bd-highlight">
+    <h3 class="text-dark">{{blog.title}}</h5>
+    <hr>
+    <p >{{blog.content}}</p>
+    <div >
+      {% if request.user == blog.author %}
+      <a href="{% url 'update' blog.id  %}" class="btn btn-outline-dark">Update</a>
+      <a href="{% url 'delete' blog.id  %}" class="btn btn-outline-dark">Delete</a>
+      {% endif %} 
+    </div>
+  </div>
+</div>
+        <div class="d-flex align-items-end flex-column bd-highlight mb-3">
+          <form action='{%url 'like_post' blog.pk%}' method='POST' >
+            {% csrf_token %}
+           <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
+             <i class="icon fa-solid fa-heart">
+          </i> {{blog.total_likes}} </button>
+          <i class="icon fa fa-eye"></i> {% get_hit_count for blog %}
+          <i class="icon fa-solid fa-comment-dots px-3"></i>
+          </form>
+        </div>
+        <div class="card-footer">
+        <div  class="d-flex bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+          <img class='rounded-circle' src='{{blog.author.profile.image.url}}'>
         <small class='text-muted'>Author: {{blog.author}}</small>
         <br>
-        <small class="text-muted">Last updated 3 mins ago</small>
+        <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small>
+        </div>
+
+      </div>
         <hr>
         <h3>Comments...</h3>
         <br>
         {% if not blog.comments.all %}
-          Not comments yet...<a href='{%url 'add_comment' blog.pk %}'>Add one</a>
+          Not comments yet... <a href='{%url 'add_comment' blog.pk %}'> Add one</a>
         {% else %}
-          {% for comment in blog.comments.all %}'
-          <strong>
-            {{comment.name}}-
-            {{comment.date_added}}
-          </strong> <br>
+          {% for comment in blog.comments.all %}
           {{comment.body}}
           <br>
+          <strong>
+            {{comment.name}} -
+            {{comment.date_added}}
+          </strong> <br>
+          <br>
           {% endfor %}
-          <a href='{%url 'add_comment' blog.pk %}'>Add comment</a>
+          <button class='btn btn-outline-dark'>
+            <a class='text-dark' href='{%url 'add_comment' blog.pk %}'>Add comment</a></button>
         {% endif %}
           
       </div>

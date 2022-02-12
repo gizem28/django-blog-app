@@ -6,7 +6,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     image = models.ImageField(upload_to="blogs/", default="avatar.png")
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     Category =(
         ("1", "Tecnology"),

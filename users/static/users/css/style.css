@@ -1,0 +1,34 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+.logox{
+    font-family:sans-serif;
+    margin: 10px;
+}
+
+.logo{
+    height:50px;
+}
+
+.navbar{
+    height:75px;
+}
+
+i, .icon{
+    color:darkgray;
+}
+
+.hr1{
+    background-color: black;
+}
+
+.detail{
+    height: 400px;
+    width: 500px;
+}
+
+.rounded-circle-list{
+    height:23px;
+}

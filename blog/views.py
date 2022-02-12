@@ -9,20 +9,26 @@ from main.settings import LOGIN_REDIRECT_URL
 from django.http import HttpResponseRedirect
 from hitcount.views import HitCountDetailView
 
-
-class PostCreateView(SuccessMessageMixin, CreateView):
+@login_required()
+def PostCreateView(request):
     model = Blog
-    form_class = BlogForm
-    template_name="blog/post_create.html"
-    success_url= reverse_lazy('list')
-    success_message =('Blog added successfully.')
+    form=BlogForm()
+    if request.method == "POST":
+        form = BlogForm(request.POST, request.FILES)
+        if form.is_valid():
+            blog=form.save()
+            blog.author=request.user
+            form.save()
+            return redirect("list")
+            success_message =('Blog added successfully.')
+    context = {"form":form}  
+    return render(request, "blog/post_create.html", context)
+
     
 class PostListView(ListView):
     template_name='blog/post_list.html'
     model=Blog
     context_object_name='blogs'
-    
-    
 
 class PostDetailView(HitCountDetailView):
     model=Blog
