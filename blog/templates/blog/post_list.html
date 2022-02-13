@@ -30,7 +30,7 @@
         </form>
       </div>
         <div class="card-footer">
-          <img class='rounded-circle-list' src='{{blog.author.profile.image.url}}'/>
+          {% comment %} <img class='rounded-circle-list' src='{{user.profile.image.url}}'/> {% endcomment %}
           <small class='text-muted ml-2'>Author: {{blog.author}}</small>
           <br>
           {% comment %} <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small> {% endcomment %}
