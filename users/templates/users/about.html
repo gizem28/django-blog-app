@@ -1,13 +1,14 @@
-{% load static %}
-
-  <div class="container my-5">
+{% extends 'users/base.html' %}
+{% load static %} 
+{% block content %}
+<div class="container mt-5">
     <div class="row">
       <div class="col-8">
-        <img class='w-100' src="{% static 'users/img/design.png' %}" alt="..." />
+        <img class='w-100' src="{% static 'users/img/about1.png' %}" alt="..." />
       </div>
       <div class="col-4">
         <div>
-          <img class='w-100' src="{% static 'users/img/subheading.png' %}" alt="..." />
+          <img class='w-100' src="{% static 'users/img/about2.png' %}" alt="..." />
         </div>
         <center class='mt-5'>
         <a href=" {% url 'register' %}" class="btn btn-outline-dark btn-lg">Join Us</a>
@@ -15,3 +16,4 @@
       </center>
     </div>
   </div>
+  {% endblock content %}

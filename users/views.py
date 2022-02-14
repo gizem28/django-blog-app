@@ -8,8 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .forms import UserUpdateForm, ProfileUpdateForm
 
-class HomeView(TemplateView):
-    template_name="users/home.html"
+class AboutView(TemplateView):
+    template_name="users/about.html"
 
 def register(request):
     form=UserForm
