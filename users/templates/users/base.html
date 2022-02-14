@@ -15,10 +15,9 @@
       <!-- reference your installed Font Awesome Free package's files here -->
       <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
   </head>
-
   <body>
     {% include "users/navbar.html" %}
-    <div style="margin-top: 100px; margin-bottom: 100px" class="container">
+    <div  class="container my-4">
             {% if messages %} 
         {% for message in messages %} 
             {% if message.tags == "error" %}
