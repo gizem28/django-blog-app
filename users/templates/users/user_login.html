@@ -4,13 +4,13 @@
   <div class="col-md-6 offset-md-3">
     <h2>Login</h2>
     <hr>
-    <form class="mb-4" action="{% url 'user_login' %}" method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %} {{form|crispy}}
       <button type="submit" class="btn btn-outline-dark mr-3">Login</button>
       <span><a href="{% url 'password_reset' %}">Forget Password?</a></span>
       <hr>
     </form>
-    <span>Need an account? <a href="{% url 'register' %}">Sign Up Now</a></span>
+    <small>Need an account? <a class='ml-2' href="{% url 'register' %}">Sign Up Now</a></small>
     <hr>
   </div>
 </div>

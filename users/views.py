@@ -22,7 +22,7 @@ def register(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "Your account has been created!")
-            return redirect("list")
+            return redirect("login")
     context = {
         "form_user" : form
     }
@@ -45,6 +45,7 @@ def user_login(request):
             return redirect('list')
     return render(request, 'users/user_login.html', {"form": form})
 
+@login_required
 def profile(request):
     return render(request, 'users/profile.html')
 

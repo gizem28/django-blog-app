@@ -142,7 +142,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'users.Profile'
 
-LOGIN_REDIRECT_URL = 'users/user_login.html'
-
+LOGIN_REDIRECT_URL = 'users/user_login.html' #'list'
+LOGIN_URL ='user_login'
