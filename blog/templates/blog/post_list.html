@@ -25,8 +25,10 @@
          <button style='background:white' class='btn' type='submit', name='blog_id', value='{{blog.id}}'>
            <i class="fa-solid fa-heart ">
         </i> {{blog.total_likes}} </button>
-        <i class="fa fa-eye"></i> {% get_hit_count for blog %}
-        <i class="fa-solid fa-comment-dots px-3"> </i>{{blog.comment.total_comments}}
+        <button style='background:white' class='btn' type='submit', name='blog_id',  value='{{blog.id}}'>
+          <i class="fa fa-eye"></i> {% get_hit_count for blog %}</button>
+        <button style='background:white' class='btn' type='submit', name='blog_id',  value='{{blog.id}}'>
+          <i class="fa-solid fa-comment-dots"></i> {{blog.comments.count}} </button>
         </form>
       </div>
         <div class="card-footer">

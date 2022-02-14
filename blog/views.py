@@ -16,7 +16,9 @@ def PostCreateView(request):
     if request.method == "POST":
         form = BlogForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            blog=form.save(commit=False)
+            blog.author=request.user
+            blog.save()
             return redirect("list")
             success_message =('Blog added successfully.')
     context = {"form":form}  

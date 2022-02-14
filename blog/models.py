@@ -2,12 +2,13 @@ from django.db import models
 from users.forms import UserForm   
 from users.models import Profile
 from django.contrib.auth.models import User
+from django.conf import settings
 
 class Blog(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     image = models.ImageField(upload_to="blogs/", default="avatar.png")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
     
     Category =(
         ("1", "Tecnology"),
@@ -43,5 +44,3 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.post.title}{self.name}"
     
-    def total_comments(self):
-        return self.post.count()
