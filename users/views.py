@@ -45,9 +45,6 @@ def user_login(request):
             return redirect('list')
     return render(request, 'users/user_login.html', {"form": form})
 
-@login_required
-def profile(request):
-    return render(request, 'users/profile.html')
 
 def password_change(request):
     if request.method == 'POST':
@@ -79,10 +76,10 @@ def profile(request):
           return redirect('profile')
     else:
        u_form=UserUpdateForm(instance=request.user)
-       p_form=ProfileUpdateForm(instance=request.user)
+       p_form=ProfileUpdateForm(instance=request.user.profile)
     context={
         'u_form':u_form,
-        'p_fomr':p_form
+        'p_form':p_form
     }
     
     return render(request, "users/profile.html", context)

@@ -3,22 +3,21 @@
 {% load crispy_forms_tags %} {% block content %}
 <p class='h3'>Profile</p>
 <hr class='bg-dark' />
-<div class="content-section pt-3">
+<div class="content-section pt-2">
   <div class="media">
     <img class="rounded-circle" src="{{user.profile.image.url}}">
     <div class="media-body m-3">
       <h4>{{user.username}}</h2>
       <p>{{user.email}}</p>
       <p>{{user.profile.bio}}</p>
+      <hr>
+      <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %} 
+        {{ u_form | crispy }} {{ p_form | crispy }}
+        <button type="submit" class="btn btn-outline-dark mt-4">Update</button>
+      </form>
     </div>
   </div>
 </div>
-<div>
-  <form action="" method="post" enctype="multipart/form-data">
-    {% csrf_token %} 
-    {{ u_form | crispy }} {{ p_form | crispy }}
-    <button type="submit" class="btn btn-outline-dark mt-4">Update</button>
-  </form>
   
-</div>
 {% endblock content %}

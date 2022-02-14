@@ -7,7 +7,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=50)
     content = models.TextField()
     image = models.ImageField(upload_to="blogs/", default="avatar.png")
-    # author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     
     Category =(
         ("1", "Tecnology"),
@@ -42,3 +42,6 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"{self.post.title}{self.name}"
+    
+    def total_comments(self):
+        return self.post.count()

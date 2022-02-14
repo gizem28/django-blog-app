@@ -26,12 +26,12 @@
            <i class="fa-solid fa-heart ">
         </i> {{blog.total_likes}} </button>
         <i class="fa fa-eye"></i> {% get_hit_count for blog %}
-        <i class="fa-solid fa-comment-dots px-3"></i>
+        <i class="fa-solid fa-comment-dots px-3"> </i>{{blog.comment.total_comments}}
         </form>
       </div>
         <div class="card-footer">
-          <img class='rounded-circle-list' src='{{user.profile.image.url}}'/>
-          <small class='text-muted ml-2'>Author: {{Author}}</small>
+          <img class='rounded-circle-list' src='{{blog.author.profile.image.url}}'/>
+          <small class='text-muted ml-2'>Author: {{blog.author}}</small>
           <br>
           {% comment %} <small class="text-muted">Last updated {{ blog.date_created |timesince}} ago</small> {% endcomment %}
         </div>
