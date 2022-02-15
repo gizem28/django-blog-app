@@ -30,6 +30,7 @@ class PostListView(ListView):
     model=Blog
     context_object_name='blogs'
 
+
 class PostDetailView(HitCountDetailView):
     model=Blog
     template_name='blog/blog_detail.html'
@@ -55,10 +56,12 @@ class PostDeleteView(DeleteView):
     template_name='blog\post_delete.html'
     success_url=reverse_lazy('list')
     
+@login_required()
 def LikeView(request, pk):
     post=get_object_or_404(Blog, id=request.POST.get('blog_id'))
     post.likes.add(request.user)
     return HttpResponseRedirect(reverse('detail', args=[str(pk)]))
+
 
 class AddCommentView(CreateView):
     model=Comment
