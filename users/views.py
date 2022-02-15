@@ -7,26 +7,36 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .forms import UserUpdateForm, ProfileUpdateForm
-
+from django.contrib.auth.models import User
+from .models import Profile
+from django.db import transaction
 class AboutView(TemplateView):
     template_name="users/about.html"
 
 def register(request):
-    form=UserForm
     if request.method=='POST':
         form=UserForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user= form.save()
+            user.refresh_from_db()
+            # user.profile.bio = form.cleaned_data['bio']
+            # user.profile.image = form.cleaned_data['image']
+            user.save()
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password1"]
             user = authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "Your account has been created!")
-            return redirect("login")
+            return redirect("list")
+    else:
+        form=UserForm()
+        
     context = {
         "form_user" : form
     }
     return render(request, "users/register.html", context)
+
+    
 
 def user_logout(request):
     messages.success(request, "You Logout!")
@@ -65,6 +75,7 @@ def password_change(request):
 
 
 @login_required
+@transaction.atomic
 def profile(request):
     if request.method == 'POST':
       u_form=UserUpdateForm(request.POST, instance=request.user)
@@ -83,3 +94,4 @@ def profile(request):
     }
     
     return render(request, "users/profile.html", context)
+

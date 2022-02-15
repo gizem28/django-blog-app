@@ -8,7 +8,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 class Profile(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE, unique=True,blank=True)
     image=models.ImageField(default='default.png', upload_to='profile_pics' )
     bio=models.TextField(max_length=500, blank=True)
     
@@ -20,13 +20,18 @@ class Profile(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+        
 
-    def save(self):
-        super().save()
+@receiver(post_save, sender=User)
+def save_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+    # def save(self):
+    #     super().save()
         
-        img = Image.open(self.image.path)
+        # img = Image.open(self.image.path)
         
-        if img.height >300 or img.width >300:
-            output_size=(300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
+        # if img.height >300 or img.width >300:
+        #     output_size=(300, 300)
+        #     img.thumbnail(output_size)
+        #     img.save(self.image.path)
