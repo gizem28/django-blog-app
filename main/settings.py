@@ -31,8 +31,8 @@ DEBUG=False
 if DEBUG:
     EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
-ALLOWED_HOSTS = ['django-blog-app28.herokuapp.com', 'localhost', '127.0.0.1']
-
+ALLOWED_HOSTS = []
+#'django-blog-app28.herokuapp.com', 'localhost', '127.0.0.1'
 
 # Application definition
 
