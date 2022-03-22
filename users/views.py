@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import UserForm
-# add authenticate and login
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -19,8 +18,6 @@ def register(request):
         if form.is_valid():
             user= form.save()
             user.refresh_from_db()
-            # user.profile.bio = form.cleaned_data['bio']
-            # user.profile.image = form.cleaned_data['image']
             user.save()
             username = form.cleaned_data["username"]
             password = form.cleaned_data["password1"]
@@ -58,8 +55,6 @@ def user_login(request):
 
 def password_change(request):
     if request.method == 'POST':
-        # We will use user change form this time
-        # Import it
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
